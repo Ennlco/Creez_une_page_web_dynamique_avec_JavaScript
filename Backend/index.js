@@ -1,7 +1,8 @@
 // Récupération des travaux depuis l'API
 const travaux = fetch("http://localhost:5678/api/works").then(travaux => travaux.json())
 
-
+console.log(travaux)
+console.log(travaux[0])
 // Récupération de l'élément du DOM qui accueillera les fichiers
 const divGallery = document.querySelector(".gallery")
 
