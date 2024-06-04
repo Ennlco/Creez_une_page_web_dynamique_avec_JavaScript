@@ -3,6 +3,10 @@ main{
     justify-content: center;
 }
 
+.log{
+    font-weight: bold;
+}
+
 .contentLogin {
     display: flex;
     align-content: center;
@@ -47,6 +51,15 @@ main{
 
 .error{
     border: 2px solid rgba(255, 0, 0, 0.5);
+}
+
+.message{
+    display: none;
+    padding: 10px;
+    justify-content: center;
+    background-color: #1D6154;
+    color: white;
+    margin-top: 50px;
 }
 
 footer{
