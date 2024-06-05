@@ -9,12 +9,15 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	
+	<script src="https://kit.fontawesome.com/3a62503aaf.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
 
 	<script src="../Backend/identifiant.js" defer></script>
 	<script src="../Backend/generateLogout.js" defer></script>
 	<script src="../Backend/generateLogin.js" defer></script>
 	<script src="../Backend/index.js" defer></script>
+
+	
 
 </head>
 <body>
@@ -42,7 +45,7 @@
 		</article>
 	</section>
 	<section id="portfolio">
-			<h2>Mes Projets</h2>
+		<h2>Mes Projets</h2>
 		<div class="contentFiltrers">
 			<div class="filtres" id="choixTous">
 				<p>Tous</p>
@@ -74,6 +77,15 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
+
+	<div class="backgroundPopUp">
+		<div class="PopUpGallery">
+			<i class="fa-solid fa-xmark"></i>
+			<h2>Galerie Photo</h2>
+			<div class="photos"></div>
+			<button type="button" class="addPhoto">Ajouter une photo</button>
+		</div>
+	</div>
 </main>
 
 <footer>

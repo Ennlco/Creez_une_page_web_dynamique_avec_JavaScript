@@ -28,4 +28,9 @@ function generationLogout(){
 
     portfolio.innerHTML = ""
     portfolio.innerText = "Mes Projets"
+
+    const filtres = document.querySelector(".contentFiltrers")
+    filtres.style.display = "flex"
+    
+
 }

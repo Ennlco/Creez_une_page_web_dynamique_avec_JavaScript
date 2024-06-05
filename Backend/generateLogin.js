@@ -1,6 +1,7 @@
 function generationLogin(){
     const navigation = document.querySelector("nav ul")
     const modif = document.querySelector("section[id=portfolio] h2")
+    const filtres = document.querySelector(".contentFiltrers")
 
     navigation.innerHTML = ""
 
@@ -22,8 +23,17 @@ function generationLogin(){
     navigation.appendChild(insta)
     insta.appendChild(image)
 
+    filtres.style.display = "none"
+
+    const divElement = document.createElement("div")
+    divElement.className = "divModif"
+    const logoEdit = document.createElement("i")
+    logoEdit.className = "fa-regular fa-pen-to-square"
     const edit = document.createElement("p")
     edit.innerText = "modifier"
-    modif.appendChild(edit)
+
+    modif.appendChild(divElement)
+    divElement.appendChild(logoEdit)
+    divElement.appendChild(edit)
 
 }

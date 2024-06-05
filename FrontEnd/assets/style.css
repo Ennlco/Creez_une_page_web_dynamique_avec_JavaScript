@@ -132,15 +132,24 @@ li:hover {
 #portfolio h2 {
 	display: flex;
 	flex-direction: row;
-	gap: 20px;
 	justify-content: center;
+	align-items: center;
 	margin-bottom: 1em;
 }
 
-#portfolio p{
-	font-size: 14px;
+.divModif{
+	margin-left: 30px;
 	display: flex;
-	align-items: center;
+	gap: 10px;
+	color: black;
+}
+
+.fa-pen-to-square{
+	font-size: 15px;
+}
+
+.divModif p{
+	font-size: 15px;
 }
 
 .contentFiltrers{
@@ -159,6 +168,7 @@ li:hover {
 	color: #1D6154;
 	font-size: 20px;
 	font-weight: bold;
+	transition: 300ms;
 }
 
 .filtres:hover{
@@ -182,7 +192,7 @@ li:hover {
 }
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
@@ -227,5 +237,86 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+
+.backgroundPopUp{
+	display: none;
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.5);
+	height: 100%;
+    width: 100%;
+	z-index: 2;
+    bottom: 0px;
+	right: 0px;
+}
+
+.PopUpGallery{
+	position: fixed;
+	top: 15%;
+	left: 25%;
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	width: 40%;
+	border-radius: 20px;
+	padding: 30px;
+}
+
+.fa-xmark{
+	display: flex;
+	justify-content: right;
+	font-size: 20px;
+}
+.PopUpGallery h2{
+	font-size: 25px;
+	font-family: 'Work Sans';
+	font-weight: lighter;
+	color: black;
+	margin: 25px auto;
+}
+
+.photos{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 90%;
+	margin: 10px auto;
+	padding-bottom: 40px;
+	border-bottom: 1px solid black;
+	row-gap: 10px;
+	column-gap: 10px;
+}
+.photos div{
+	width: 15%;
+	height: 20%;
+}
+.photos img{
+	width: 100%;
+}
+.fa-trash-can{
+	width: 8px;
+	font-size: 10px;
+	position: relative;
+	bottom: 133px;
+	left: 77px;
+	padding: 5px 7px;
+	background-color: black;
+	color: white;
+	border-radius: 3px;
+	z-index: 4;
+}
+
+.PopUpGallery button{
+	font-family: 'Syne';
+	font-size: 15px;
+	font-weight: lighter;
+	color: white;
+	background-color: #1D6154;
+	margin : 10px auto ;
+	width: 220px;
+	text-align: center;
+	border-radius: 60px ;
+	border: none;
+	padding: 7px 22px;
 }
 
