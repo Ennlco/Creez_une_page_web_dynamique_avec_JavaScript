@@ -1,3 +1,4 @@
+
 // Récupération des travaux depuis l'API
 fetch("http://localhost:5678/api/works")
 .then(reponse => reponse.json())
@@ -75,6 +76,22 @@ fltHotelRest.addEventListener("click",  function(){
 })
 })
 
+if (connection === true){
 
+    generationLogin()
 
+    function deconnection(){
 
+        const deco = document.querySelector(".logout")
+
+        deco.addEventListener("click", () =>{
+            connection = false
+            console.log(connection)
+
+            generationLogout()
+        })
+
+    }
+
+    deconnection() 
+}
