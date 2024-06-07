@@ -6,7 +6,6 @@ fetch("http://localhost:5678/api/works")
 
     // Récupération de l'élément du DOM qui accueillera les fichiers
     const divGallery = document.querySelector(".gallery")
-    const photosGallery = document.querySelector(".photos")
 
     // Fonction de création des travaux 
     function generationTravaux(travaux){
@@ -41,7 +40,6 @@ fetch("http://localhost:5678/api/works")
     // Gestion des filtres
 
     const fltTous = document.getElementById("choixTous")
-    console.log(fltTous)
 
     fltTous.addEventListener("click", function(){
         document.querySelector(".gallery").innerHTML = ""
@@ -86,7 +84,9 @@ fetch("http://localhost:5678/api/works")
 
         const popUpGallery = document.querySelector(".backgroundPopUp")
         const clickModif = document.querySelector(".divModif")
-        const clickCross = document.querySelector(".fa-xmark")
+        const photosGallery = document.querySelector(".photos")
+        const popUp = document.querySelector(".PopUpGallery")
+        
 
         function generationPhotos(travaux){
 
@@ -106,16 +106,147 @@ fetch("http://localhost:5678/api/works")
             }
         }
 
-        
         clickModif.addEventListener("click", () =>{
             popUpGallery.style.display = "flex"
             photosGallery.innerHTML = ""
             generationPhotos(travaux)
         })
 
-        clickCross.addEventListener("click", () =>{
-            popUpGallery.style.display = "none"
+        function closePopUp(){
+            let clickCross = document.querySelector(".fa-xmark")
+            clickCross.addEventListener("click", () =>{
+                popUpGallery.style.display = "none"
+                console.log("boup!")
+            })
+        }
+        
+
+        const clickAddProjet = document.querySelector(".addPhoto")
+
+        clickAddProjet.addEventListener("click", () =>{
+            popUp.innerHTML = ""
+
+            const divTop = document.createElement("div")
+            divTop.className = "topDiv"
+            divTop.style.justifyContent = "space-between"
+            popUp.appendChild(divTop)
+
+            const back = document.createElement("i")
+            back.className = "fa-solid fa-arrow-left"
+            back.style.display = "flex"
+
+            divTop.appendChild(back)
+
+            const cross = document.createElement("i")
+            cross.className = "fa-solid fa-xmark"
+            divTop.appendChild(cross)
+
+            const titlePopUp = document.createElement("h2")
+            titlePopUp.innerText = "Ajout Photo"
+            popUp.appendChild(titlePopUp)
+
+            const divAdd = document.createElement("div")
+            divAdd.className = "addPicture"
+            popUp.appendChild(divAdd)
+
+            const icoImage = document.createElement("i")
+            icoImage.className = "fa-regular fa-image"
+            divAdd.appendChild(icoImage)
+
+            const inputAdd = document.createElement("input")
+            inputAdd.type = "submit"
+            inputAdd.id = "addPicture"
+            inputAdd.value = "+ Ajouter photo"
+            divAdd.appendChild(inputAdd)
+
+            const textAdd = document.createElement("p")
+            textAdd.innerText = "jpg, png : 4mo max"
+            divAdd.appendChild(textAdd)
+
+            const divInfo = document.createElement("div")
+            divInfo.className = "divInfo"
+            popUp.appendChild(divInfo)
+
+            const titleAdd = document.createElement("label")
+            titleAdd.for = "tilte"
+            titleAdd.innerText = "Titre"
+            divInfo.appendChild(titleAdd)
+
+            const titleInput = document.createElement("input")
+            titleInput.type = "text"
+            divInfo.appendChild(titleInput)
+
+            const categoryAdd = document.createElement("label")
+            categoryAdd.for = "Categorie"
+            categoryAdd.innerText = "Categorie"
+            divInfo.appendChild(categoryAdd)
+
+            const categorySelect = document.createElement("select")
+            categorySelect.name = "categorySelect"
+            divInfo.appendChild(categorySelect)
+
+            const optionBase = document.createElement("option")
+            optionBase.value = ""
+            categorySelect.appendChild(optionBase)
+
+            const option1 = document.createElement("option")
+            option1.value = "Objet"
+            option1.id = "selectObjet"
+            option1.innerText = "Objet"
+            categorySelect.appendChild(option1)
+
+            const option2 = document.createElement("option")
+            option2.value = "Appartements"
+            option2.id = "selectAppartements"
+            option2.innerText = "Appartements"
+            categorySelect.appendChild(option2)
+
+            const option3 = document.createElement("option")
+            option3.value = "Hotels_Restaurants"
+            option3.id = "selectHotels_Restaurants"
+            option3.innerText = "Hotels & restaurants"
+            categorySelect.appendChild(option3)
+
+            const btnValidate = document.createElement("input")
+            btnValidate.type = "submit"
+            btnValidate.value = "Valider"
+            btnValidate.id = "btnValidate"
+            popUp.appendChild(btnValidate)
+
         })
+
+        function goBack(){
+            const clickUnder = document.querySelector(".fa-arrow-left")
+
+            clickUnder.addEventListener("click", (event) =>{
+
+                console.log("bip!")
+                
+                const cross = document.createElement("i")
+                cross.className = "fa-solid fa-xmark"
+                popUp.appendChild(cross)
+
+                const titlePopUp = document.createElement("h2")
+                titlePopUp.innerText = "Galerie Photo"
+                popUp.appendChild(titlePopUp)
+
+                const divAllPhoto = document.createElement("div")
+                divAllPhoto.className = "photos"
+                popUp.appendChild(divAllPhoto)
+
+                generationPhotos(travaux)
+
+                const btnAddPhoto = document.createElement("button")
+                btnAddPhoto.type = "button"
+                btnAddPhoto.className = "addPhoto"
+                btnAddPhoto.innerText = "Ajouter une photo"
+                popUp.appendChild(btnAddPhoto)
+            })
+
+        }
+
+        goBack()
+        closePopUp()
         
         function deconnection(){
 
