@@ -90,6 +90,8 @@ fetch("http://localhost:5678/api/works")
 
         function generationPhotos(travaux){
 
+            const photosGallery = document.querySelector(".photos")
+
             for (let i = 0; i < travaux.length; i++){
 
                 const divPhoto = document.createElement("div")
@@ -118,6 +120,38 @@ fetch("http://localhost:5678/api/works")
                 popUpGallery.style.display = "none"
                 console.log("boup!")
             })
+        }
+
+        function goBack(){
+            const clickUnder = document.querySelector(".fa-arrow-left")
+
+            clickUnder.addEventListener("click", () =>{
+                    
+                popUp.innerHTML = ""
+
+                const cross = document.createElement("i")
+                cross.className = "fa-solid fa-xmark"
+                popUp.appendChild(cross)
+    
+                const titlePopUp = document.createElement("h2")
+                titlePopUp.innerText = "Galerie Photo"
+                popUp.appendChild(titlePopUp)
+    
+                const divAllPhoto = document.createElement("div")
+                divAllPhoto.className = "photos"
+                popUp.appendChild(divAllPhoto)
+    
+                generationPhotos(travaux)
+    
+                const btnAddPhoto = document.createElement("button")
+                btnAddPhoto.type = "button"
+                btnAddPhoto.className = "addPhoto"
+                btnAddPhoto.innerText = "Ajouter une photo"
+                popUp.appendChild(btnAddPhoto)
+
+                closePopUp()
+            })
+
         }
         
 
@@ -213,40 +247,11 @@ fetch("http://localhost:5678/api/works")
             btnValidate.id = "btnValidate"
             popUp.appendChild(btnValidate)
 
+            goBack()
+            closePopUp()
+
         })
 
-        function goBack(){
-            const clickUnder = document.querySelector(".fa-arrow-left")
-
-            clickUnder.addEventListener("click", (event) =>{
-
-                console.log("bip!")
-                
-                const cross = document.createElement("i")
-                cross.className = "fa-solid fa-xmark"
-                popUp.appendChild(cross)
-
-                const titlePopUp = document.createElement("h2")
-                titlePopUp.innerText = "Galerie Photo"
-                popUp.appendChild(titlePopUp)
-
-                const divAllPhoto = document.createElement("div")
-                divAllPhoto.className = "photos"
-                popUp.appendChild(divAllPhoto)
-
-                generationPhotos(travaux)
-
-                const btnAddPhoto = document.createElement("button")
-                btnAddPhoto.type = "button"
-                btnAddPhoto.className = "addPhoto"
-                btnAddPhoto.innerText = "Ajouter une photo"
-                popUp.appendChild(btnAddPhoto)
-            })
-
-        }
-
-        goBack()
-        closePopUp()
         
         function deconnection(){
 
