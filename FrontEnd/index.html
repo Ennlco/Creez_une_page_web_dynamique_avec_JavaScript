@@ -79,14 +79,35 @@
 	</section>
 
 	<div class="backgroundPopUp">
-		<div class="PopUpGallery">
-			<div class="topDiv">
-				<i class="fa-solid fa-arrow-left"></i>
-				<i class="fa-solid fa-xmark"></i>
-			</div>
+		<div class="PopUpGallery" id="galleryPhoto">
+			<i class="fa-solid fa-xmark" id="close1"></i>
 			<h2>Galerie Photo</h2>
 			<div class="photos"></div>
 			<button type="button" class="addPhoto">Ajouter une photo</button>
+		</div>
+		<div class="PopUpGallery" id="photoAdd">
+			<div class="topDiv">
+				<i class="fa-solid fa-arrow-left"></i>
+				<i class="fa-solid fa-xmark" id="close2"></i>
+			</div>
+			<h2>Ajout Photo</h2>
+			<div class="addPicture">
+				<i class="fa-regular fa-image"></i>
+				<input type="submit" id="addPicture" value="+ Ajouter photo">
+				<p>jpg, png : 4mo max</p>
+			</div>
+			<div class="divInfo">
+				<label for="tilte">Titre</label>
+				<input type="text">
+				<label for="Categorie">Categorie</label>
+				<select name="categorySelect" id="categorySelect">
+					<option value=""></option>
+					<option value="Objet" id="selectObjet">Objet</option>
+					<option value="Appartements" id="selectAppartements">Appartements</option>
+					<option value="Hotels_Restaurants" id="selectHotels_Restaurants">Hotels & restaurants</option>
+				</select>
+			</div>
+			<input type="submit" id="btnValidate" value="Valider">
 		</div>
 	</div>
 </main>

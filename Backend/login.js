@@ -3,19 +3,26 @@ const identifiant = {
     password: "S0phie",
 }
 
-const chargeUtile = JSON.stringify(identifiant)
-
-//fetch("http://localhost:5678/api/users/login"), {
-//    method: "POST",
-//    headers: {"accept": "application/json"},
-//    body: chargeUtile
-//}
-
-//fetch("http://localhost:5678/api/users/login")
-//.then(reponse => reponse.json())
-//.then (login => {
-//    console.log(login)
-//})
+const chargeUtile = JSON.stringify(identifiant);
+fetch("http://localhost:5678/api/users/login", {
+    method: "POST",
+    headers: {
+        'Accept': 'application/json',
+        "Content-Type": "application/json;charset=utf-8",
+    },
+    body: chargeUtile,
+})
+.then(response => response.json())
+.then(data => {
+    if (data.token) {
+        console.log('Token:', data.token);
+    } else {
+        console.log('ya R');
+    }
+})
+.catch(error => {
+    console.error('Erreur:', error);
+});
 
     
     function verifierEmail(balise){
@@ -78,7 +85,6 @@ const chargeUtile = JSON.stringify(identifiant)
     
                     divMessage.appendChild(textElement)
 
-                    console.log("boup!")
                 } else {
 
                     divMessage.style.display = "flex"

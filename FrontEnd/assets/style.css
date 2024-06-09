@@ -250,14 +250,26 @@ footer nav ul {
 	right: 0px;
 }
 
-.PopUpGallery{
+#galleryPhoto{
 	position: fixed;
 	top: 15%;
 	left: 25%;
 	display: flex;
 	flex-direction: column;
 	background-color: white;
-	width: 40%;
+	width: 45%;
+	border-radius: 20px;
+	padding: 30px;
+}
+
+#photoAdd{
+	position: fixed;
+	top: 15%;
+	left: 25%;
+	display: none;
+	flex-direction: column;
+	background-color: white;
+	width: 45%;
 	border-radius: 20px;
 	padding: 30px;
 }
@@ -287,19 +299,19 @@ footer nav ul {
 	column-gap: 10px;
 }
 .photos div{
+	background-repeat: no-repeat;
+	background-size: 100%;
 	width: 15%;
-	height: 20%;
+	height: 150px;
 }
-.photos img{
-	width: 100%;
-}
+
 .fa-trash-can{
 	width: 8px;
 	font-size: 10px;
 	position: relative;
-	bottom: 133px;
-	left: 77px;
-	padding: 5px 7px;
+	top: 3%;
+	left: 75%;
+	padding: 5px;
 	background-color: black;
 	color: white;
 	border-radius: 3px;
@@ -322,11 +334,7 @@ footer nav ul {
 
 .topDiv{
 	display: flex;
-	justify-content: right;
-}
-
-.fa-arrow-left{
-	display: none;
+	justify-content: space-between;
 }
 
 .fa-arrow-left, .fa-xmark{
