@@ -21,6 +21,10 @@
 
 </head>
 <body>
+	<div class="divHeader">
+		<i class="fa-regular fa-pen-to-square"></i>
+		<p>Mode édition</p>
+	</div>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
@@ -92,19 +96,23 @@
 			</div>
 			<h2>Ajout Photo</h2>
 			<div class="addPicture">
-				<i class="fa-regular fa-image"></i>
-				<input type="submit" id="addPicture" value="+ Ajouter photo">
-				<p>jpg, png : 4mo max</p>
+				<div class="previewImage"></div>
+				<div class="fileImage">
+					<i class="fa-regular fa-image"></i>
+					<input type="file" id="file" accept="image/*">
+					<label for="file" class="labelFile">+ Ajouter photo</label>
+					<p>jpg, png : 4mo max</p>
+				</div>
 			</div>
 			<div class="divInfo">
 				<label for="tilte">Titre</label>
-				<input type="text">
+				<input type="text" id="tilteProject">
 				<label for="Categorie">Categorie</label>
 				<select name="categorySelect" id="categorySelect">
 					<option value=""></option>
-					<option value="Objet" id="selectObjet">Objet</option>
-					<option value="Appartements" id="selectAppartements">Appartements</option>
-					<option value="Hotels_Restaurants" id="selectHotels_Restaurants">Hotels & restaurants</option>
+					<option value="Objet" id="1">Objet</option>
+					<option value="Appartements" id="2">Appartements</option>
+					<option value="Hotels_Restaurants" id="3">Hotels & restaurants</option>
 				</select>
 			</div>
 			<input type="submit" id="btnValidate" value="Valider">

@@ -1,38 +1,36 @@
+// Récupération de l'élément du DOM qui accueillera les fichiers
+const divGallery = document.querySelector(".gallery")
 
-// Récupération des travaux depuis l'API
 fetch("http://localhost:5678/api/works")
-.then(reponse => reponse.json())
-.then (travaux => {
-
-    // Récupération de l'élément du DOM qui accueillera les fichiers
-    const divGallery = document.querySelector(".gallery")
-
+    .then(reponse => reponse.json())
+    .then (travaux => {
     // Fonction de création des travaux 
     function generationTravaux(travaux){
-        
-        for (let i = 0; i < travaux.length; i++){
             
+        for (let i = 0; i < travaux.length; i++){
+                    
 
             // Création d'une balise dédié à une pièce automobile
             const travauElement = document.createElement("figure")
-            
+                
             // On rattache la balise article à la section Fiche
             divGallery.appendChild(travauElement)
-            
+                    
             // Création des balise image
             const imgElement = document.createElement("img")
             imgElement.src = travaux[i].imageUrl
             // Rattachement de la balises au DOM
             travauElement.appendChild(imgElement)
-            
+                    
             // Création des balise image
             const titleElement = document.createElement("figcaption")
             titleElement.innerText = travaux[i].title
             // Rattachement de la balises au DOM
             travauElement.appendChild(titleElement)
-            
+                    
         }
-        
+
+            
     }
 
     generationTravaux(travaux)
@@ -77,6 +75,7 @@ fetch("http://localhost:5678/api/works")
     })
 
 
+
     if (connection === true){
 
         generationLogin()
@@ -92,50 +91,136 @@ fetch("http://localhost:5678/api/works")
         const clickClose2 = document.getElementById("close2")
         const clickUnder = document.querySelector(".fa-arrow-left")
         
-        console.log(popUpGallery.style)
-        function generationPhotos(travaux){
+
+        function generationPhotos(){
+
 
             for (let i = 0; i < travaux.length; i++){
 
                 const divPhoto = document.createElement("div")
                 divPhoto.style.backgroundImage = "url(" + travaux[i].imageUrl + ")"
+                divPhoto.id = "divWork_" + [i]
                 photosGallery.appendChild(divPhoto)
 
                 const icoDelete = document.createElement("i")
                 icoDelete.className = "fa-solid fa-trash-can"
+                icoDelete.id = "delete_" + [i]
                 divPhoto.appendChild(icoDelete)
 
             }
         }
-   
+
+        function deleteElement(){
+
+            for (let i = 0; i < travaux.length; i++){
+            
+                let deleteWork = document.getElementById("delete_"+[i])
+                let divWork = document.getElementById("divWork_"+[i])
+                
+                deleteWork.addEventListener("click", () =>{
+                
+                    travaux.splice([i], 1)
+                    divWork.remove() 
+                })
+            }
+        }
+
+        const btnAddPhoto = document.getElementById("file")
+
+        function add_PreviewImage(){
+                
+            const previewPhoto = document.querySelector(".previewImage")
+            const divFile = document.querySelector(".fileImage")
+
+            btnAddPhoto.addEventListener("change", () =>{
+
+                const curFiles = btnAddPhoto.files
+
+                //travaux.push(btnAddPhoto.value)
+                    
+                const imgPreview = document.createElement("img")
+                // imgPreview.src = URL.createObjectURL(curFiles)
+                previewPhoto.appendChild(imgPreview)
+                    
+                btnAddPhoto.style.display = "none"
+                divFile.style.display = "none"
+                previewPhoto.style.display = "flex"
+
+                //console.log(imgPreview.src)
+            })
+        }
+
+         function addProject(){
+                
+            const btnValiderAdd = document.getElementById("btnValidate")
+            const curFiles = btnAddPhoto.files
+
+            btnValiderAdd.addEventListener("submit", (event) =>{
+                event.preventDefault()
+
+                const projet = {
+                    id: travaux.length +1,
+                    title: event.target.querySelector("tilteProject").value,
+                    imageUrl: URL.createObjectURL(curFiles),
+                    categoryId: event.target.querySelector("option").id,
+                }
+
+                const chargeUtile = JSON.stringify(projet)
+
+                fetch("http://localhost:5678/api/works", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: chargeUtile
+                })
+
+                galleryPhoto.style.display = "flex"
+                photoAdd.style.display = "none"
+                photosGallery.innerHTML = ""
+                generationPhotos(travaux)
+                deleteElement()
+            })
+        }
+        
         clickModif.addEventListener("click", () =>{
             popUpGallery.style.display = "flex"
             galleryPhoto.style.display = "flex"
             photosGallery.innerHTML = ""
             generationPhotos(travaux)
+            deleteElement()
         })
 
         clickClose1.addEventListener("click", () =>{
             popUpGallery.style.display = "none"
             galleryPhoto.style.display = "none"
             photoAdd.style.display = "none"
+            divGallery.innerHTML = ""
+            generationTravaux(travaux)
         })
 
         clickAddProjet.addEventListener("click", () =>{
             galleryPhoto.style.display = "none"
             photoAdd.style.display = "flex"
+            add_PreviewImage()
         })
 
         clickUnder.addEventListener("click", () =>{
             galleryPhoto.style.display = "flex"
             photoAdd.style.display = "none"
+            photosGallery.innerHTML = ""
+            generationPhotos(travaux)
+            deleteElement()
         })
 
         clickClose2.addEventListener("click", () =>{
             popUpGallery.style.display = "none"
             galleryPhoto.style.display = "none"
             photoAdd.style.display = "none"
+            divGallery.innerHTML = ""
+            generationTravaux(travaux)
         })
+
+        addProject()
+        
 
         function deconnection(){
 
@@ -152,9 +237,9 @@ fetch("http://localhost:5678/api/works")
         deconnection() 
 
     } else {
-        
+            
         generationLogout()
 
     }
-})
 
+})

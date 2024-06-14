@@ -4,6 +4,7 @@ const identifiant = {
 }
 
 const chargeUtile = JSON.stringify(identifiant);
+
 fetch("http://localhost:5678/api/users/login", {
     method: "POST",
     headers: {

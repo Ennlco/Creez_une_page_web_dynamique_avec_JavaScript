@@ -239,6 +239,25 @@ footer nav ul {
 	margin: 2em
 }
 
+.divHeader{
+	width: 100%;
+	height: 50px;
+	background-color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+}
+
+.divHeader i{
+	color: white;
+}
+
+.divHeader p{
+	color: white;
+	font-size: 15px;
+}
+
 .backgroundPopUp{
 	display: none;
 	position: fixed;
@@ -299,6 +318,8 @@ footer nav ul {
 	column-gap: 10px;
 }
 .photos div{
+	display: flex;
+	justify-content: right;
 	background-repeat: no-repeat;
 	background-size: 100%;
 	width: 15%;
@@ -306,16 +327,19 @@ footer nav ul {
 }
 
 .fa-trash-can{
-	width: 8px;
-	font-size: 10px;
-	position: relative;
-	top: 3%;
-	left: 75%;
+	height: 15px;
 	padding: 5px;
 	background-color: black;
 	color: white;
 	border-radius: 3px;
 	z-index: 4;
+	margin-top: 5px;
+	margin-right: 5px;
+	transition: 300ms;
+}
+
+.fa-trash-can:hover{
+	background-color: red;
 }
 
 .PopUpGallery button{
@@ -345,7 +369,7 @@ footer nav ul {
 	width: 60%;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	align-items: center;
 	text-align: center;
 	margin: 15px auto;
 	background-color: rgba(95, 158, 160, 0.2);
@@ -353,13 +377,40 @@ footer nav ul {
 	border-radius: 5px;
 }
 
+.previewImage{
+	display: none;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	width: 30%;
+	height: 100%;
+}
+
+.fileImage{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	margin: 15px auto;
+}
+
 .fa-image{
+	display: flex;
 	font-size: 65px;
 	color: rgba(180, 180, 180, 0.5);
 }
 
-#addPicture{
-	padding: 10px 15px;
+input[type="file"]{
+    display: flex;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+
+}
+
+input[type="file"] + .labelFile{
+    display: flex;
+	justify-content: center;
+    padding: 10px 15px;
 	border-radius: 30px;
 	border: none;
 	font-size: 12px;
@@ -369,7 +420,8 @@ footer nav ul {
 	margin-bottom: 15px;
 }
 
-.addPicture p{
+.fileImage p{
+	display: flex;
 	font-size: 12px;
 	color: black;
 }
