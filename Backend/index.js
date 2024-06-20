@@ -151,9 +151,16 @@ fetch("http://localhost:5678/api/works")
                 let divWork = document.getElementById("divWork_"+[i])
                 
                 deleteWork.addEventListener("click", () =>{
-                
-                    travaux.splice([i], 1)
+                    const idDelete = i
+                    
                     divWork.remove() 
+                    
+                    fetch(`http://localhost:5678/api/works/${idDelete}`, {
+                        method :'DELETE', 
+                        headers: {'Authorization': `Bearer ${token}`}
+                    })
+
+                    console.log(travaux)
                 })
             }
         }
