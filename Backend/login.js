@@ -15,17 +15,7 @@ fetch("http://localhost:5678/api/users/login", {
 })
 .then(response => response.json())
 .then(data => {
-    if (data.token) {
-        console.log('Token:', data.token);
-    } else {
-        console.log('ya R');
-    }
-})
-.catch(error => {
-    console.error('Erreur:', error);
-});
 
-    
     function verifierEmail(balise){
         let emailRegExp = new RegExp("[a-zA-Z._-]+@[a-zA-Z._-]+\\.[a-z]+")
     
@@ -35,18 +25,17 @@ fetch("http://localhost:5678/api/users/login", {
             balise.style.boxShadow = "0px 4px 14px rgba(255, 0, 0, 0.5)"
         }
     }
-
+    
     function verifierPassWord(balise){
-
+    
         if(balise.value === identifiant.password){
             balise.style.boxShadow = "0px 4px 14px rgba(0, 0, 0, 0.09)"
         } else {
             balise.style.boxShadow = "0px 4px 14px rgba(255, 0, 0, 0.5)"
         }
     }
-    
-    
-     function clickconnection(){
+
+    function clickconnection(){
     
         const emailLogin = document.getElementById("emailLogin")
         const passWordLogin = document.getElementById("passWord")
@@ -64,17 +53,18 @@ fetch("http://localhost:5678/api/users/login", {
             
                 verifierPassWord(passWordLogin)
 
-                document.location.href="index.html"
+                const token = data.token
+                const valeurToken = JSON.stringify(token)
 
-                connection = true
+                window.localStorage.setItem("token", valeurToken)
+
+                document.location.href="index.html"
             
             } else {
 
                 verifierEmail(emailLogin)
             
                 verifierPassWord(passWordLogin)
-
-                connection = false
 
                 if(divMessage.style.display === "flex"){
 
@@ -94,12 +84,14 @@ fetch("http://localhost:5678/api/users/login", {
     
                     divMessage.appendChild(textElement)
                 }
-
             }
-           
-
         })
     }
       
-clickconnection()
+    clickconnection()
+    
+})
+.catch(error => {
+    console.error('Erreur:', error);
+});
 

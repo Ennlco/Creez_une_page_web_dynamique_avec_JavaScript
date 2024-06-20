@@ -379,8 +379,6 @@ footer nav ul {
 
 .previewImage{
 	display: none;
-	background-repeat: no-repeat;
-	background-size: 100%;
 	width: 30%;
 	height: 100%;
 }

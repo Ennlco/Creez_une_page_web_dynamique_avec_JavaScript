@@ -2,6 +2,9 @@ function generationLogout(){
 
     const navigation = document.querySelector("nav ul")
     const portfolio = document.querySelector("section[id=portfolio] h2")
+    const divEdition = document.querySelector(".divHeader")
+
+    divEdition.style.display = "none"
 
     navigation.innerHTML = ""
 

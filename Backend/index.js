@@ -1,3 +1,5 @@
+let token = window.localStorage.getItem("token")
+
 // Récupération de l'élément du DOM qui accueillera les fichiers
 const divGallery = document.querySelector(".gallery")
 
@@ -74,10 +76,12 @@ fetch("http://localhost:5678/api/works")
         generationTravaux(hotelRestoFiltrees)
     })
 
+    if (token === null){
 
+        generationLogout()
 
-    if (connection === true){
-
+    } else {
+            
         generationLogin()
 
         const popUpGallery = document.querySelector(".backgroundPopUp")
@@ -136,50 +140,62 @@ fetch("http://localhost:5678/api/works")
 
                 const curFiles = btnAddPhoto.files
 
-                //travaux.push(btnAddPhoto.value)
+                if (curFiles.length > 0){
+
+                    previewPhoto.innerHTML = ""
+
+                    const imgPreview = document.createElement("img")
+                    imgPreview.src = URL.createObjectURL(curFiles[0])
+                    imgPreview.style.width = "100%"
+                    previewPhoto.appendChild(imgPreview)
                     
-                const imgPreview = document.createElement("img")
-                // imgPreview.src = URL.createObjectURL(curFiles)
-                previewPhoto.appendChild(imgPreview)
-                    
-                btnAddPhoto.style.display = "none"
-                divFile.style.display = "none"
-                previewPhoto.style.display = "flex"
+                    btnAddPhoto.style.display = "none"
+                    divFile.style.display = "none"
+                    previewPhoto.style.display = "flex"
 
-                //console.log(imgPreview.src)
-            })
-        }
-
-         function addProject(){
-                
-            const btnValiderAdd = document.getElementById("btnValidate")
-            const curFiles = btnAddPhoto.files
-
-            btnValiderAdd.addEventListener("submit", (event) =>{
-                event.preventDefault()
-
-                const projet = {
-                    id: travaux.length +1,
-                    title: event.target.querySelector("tilteProject").value,
-                    imageUrl: URL.createObjectURL(curFiles),
-                    categoryId: event.target.querySelector("option").id,
                 }
+                    
 
-                const chargeUtile = JSON.stringify(projet)
-
-                fetch("http://localhost:5678/api/works", {
-                    method: "POST",
-                    headers: {"Content-Type": "application/json"},
-                    body: chargeUtile
-                })
-
-                galleryPhoto.style.display = "flex"
-                photoAdd.style.display = "none"
-                photosGallery.innerHTML = ""
-                generationPhotos(travaux)
-                deleteElement()
             })
         }
+
+        function addProject(){
+            
+            const curFiles = btnAddPhoto.files
+            const tilteProject = document.getElementById("tilteProject")
+            const categorySelect = document.querySelector("option")
+                    
+            const projet = {
+                id: travaux.length +1,
+                title: tilteProject.value,
+                imageUrl: URL.createObjectURL(curFiles[0]),
+                categoryId: categorySelect.id,
+                userId: "0"
+            }
+
+            const chargeUtile = JSON.stringify(projet)
+
+            fetch("http://localhost:5678/api/works", {
+                method: "POST",
+                headers: {"Content-Type": "multipart/form-data"},
+                body: chargeUtile
+            })
+
+            console.log("j'ajoute la photo")
+            galleryPhoto.style.display = "flex"
+            photoAdd.style.display = "none"
+            photosGallery.innerHTML = ""
+            generationPhotos(travaux)
+            deleteElement()
+        }
+
+        const btnValiderAdd = document.getElementById("btnValidate")
+
+        btnValiderAdd.addEventListener("click", (event) =>{
+            event.preventDefault()
+            addProject(travaux)
+            console.log(travaux)
+        })
         
         clickModif.addEventListener("click", () =>{
             popUpGallery.style.display = "flex"
@@ -218,8 +234,6 @@ fetch("http://localhost:5678/api/works")
             divGallery.innerHTML = ""
             generationTravaux(travaux)
         })
-
-        addProject()
         
 
         function deconnection(){
@@ -227,7 +241,8 @@ fetch("http://localhost:5678/api/works")
             const deco = document.querySelector(".logout")
 
             deco.addEventListener("click", () =>{
-                connection = false
+                
+                window.localStorage.removeItem("token")
 
                 generationLogout()
             })
@@ -236,10 +251,5 @@ fetch("http://localhost:5678/api/works")
 
         deconnection() 
 
-    } else {
-            
-        generationLogout()
-
     }
-
 })

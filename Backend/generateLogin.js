@@ -1,8 +1,10 @@
 function generationLogin(){
-    const header = document.querySelector("header")
     const navigation = document.querySelector("nav ul")
     const modif = document.querySelector("section[id=portfolio] h2")
     const filtres = document.querySelector(".contentFiltrers")
+    const divEdition = document.querySelector(".divHeader")
+
+    divEdition.style.display = "flex"
 
     navigation.innerHTML = ""
 
