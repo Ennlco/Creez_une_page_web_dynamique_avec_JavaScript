@@ -3,6 +3,35 @@ let token = window.localStorage.getItem("token")
 // Récupération de l'élément du DOM qui accueillera les fichiers
 const divGallery = document.querySelector(".gallery")
 
+const btnAddPhoto = document.getElementById("file")
+
+function addProject(){
+            
+    const curFiles = btnAddPhoto.files
+    const tilteProject = document.getElementById("tilteProject")
+    const categorySelect = document.querySelector("option")
+    const formData = new FormData()
+    
+    const projet = {
+        title: tilteProject.value,
+        image: URL.createObjectURL(curFiles[0]),
+        category: categorySelect.id,
+    }
+        
+    formData.append("image", projet.image)
+    formData.append("title", projet.title)
+    formData.append("category", projet.category)
+
+
+    fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {"Content-Type": "multipart/form-data"},
+        body: formData
+    })
+
+}
+
+
 fetch("http://localhost:5678/api/works")
     .then(reponse => reponse.json())
     .then (travaux => {
@@ -129,8 +158,6 @@ fetch("http://localhost:5678/api/works")
             }
         }
 
-        const btnAddPhoto = document.getElementById("file")
-
         function add_PreviewImage(){
                 
             const previewPhoto = document.querySelector(".previewImage")
@@ -154,46 +181,24 @@ fetch("http://localhost:5678/api/works")
                     previewPhoto.style.display = "flex"
 
                 }
-                    
-
             })
-        }
-
-        function addProject(){
-            
-            const curFiles = btnAddPhoto.files
-            const tilteProject = document.getElementById("tilteProject")
-            const categorySelect = document.querySelector("option")
-                    
-            const projet = {
-                id: travaux.length +1,
-                title: tilteProject.value,
-                imageUrl: URL.createObjectURL(curFiles[0]),
-                categoryId: categorySelect.id,
-                userId: "0"
-            }
-
-            const chargeUtile = JSON.stringify(projet)
-
-            fetch("http://localhost:5678/api/works", {
-                method: "POST",
-                headers: {"Content-Type": "multipart/form-data"},
-                body: chargeUtile
-            })
-
-            console.log("j'ajoute la photo")
-            galleryPhoto.style.display = "flex"
-            photoAdd.style.display = "none"
-            photosGallery.innerHTML = ""
-            generationPhotos(travaux)
-            deleteElement()
         }
 
         const btnValiderAdd = document.getElementById("btnValidate")
 
         btnValiderAdd.addEventListener("click", (event) =>{
+            
             event.preventDefault()
-            addProject(travaux)
+            addProject()
+
+            galleryPhoto.style.display = "flex"
+            photoAdd.style.display = "none"
+            photosGallery.innerHTML = ""
+            
+            generationPhotos(travaux)
+            deleteElement()
+
+            console.log("j'ajoute la photo")
             console.log(travaux)
         })
         
