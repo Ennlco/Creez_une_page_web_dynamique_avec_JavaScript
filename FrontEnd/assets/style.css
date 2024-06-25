@@ -48,11 +48,15 @@ table {
 }
 a{
 	text-decoration: none;
+	color: black;
 }
 /** end reset css**/
-body {
+.divBody{
 	max-width: 1140px;
 	margin:auto;
+}
+
+body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
@@ -240,10 +244,10 @@ footer nav ul {
 }
 
 .divHeader{
+	max-width: none;
 	width: 100%;
 	height: 50px;
 	background-color: black;
-	display: flex;
 	justify-content: center;
 	align-items: center;
 	gap: 15px;

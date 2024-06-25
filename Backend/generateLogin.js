@@ -9,9 +9,13 @@ function generationLogin(){
     navigation.innerHTML = ""
 
     const projets = document.createElement("li")
-    projets.innerText = "projets"
+    const linkProjet = document.createElement("a")
+    linkProjet.href = "#portfolio"
+    linkProjet.innerText = "projets"
     const contact = document.createElement("li")
-    contact.innerText = "contact"
+    const linkcontact = document.createElement("a")
+    linkcontact.href = "#contact"
+    linkcontact.innerText = "contact"
     const logout = document.createElement("li")
     logout.innerText = "logout"
     logout.className = "logout"
@@ -21,7 +25,9 @@ function generationLogin(){
     image.alt = "Instagram"
 
     navigation.appendChild(projets)
+    projets.appendChild(linkProjet)
     navigation.appendChild(contact)
+    contact.appendChild(linkcontact)
     navigation.appendChild(logout)
     navigation.appendChild(insta)
     insta.appendChild(image)
