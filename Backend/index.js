@@ -92,6 +92,7 @@ fetch("http://localhost:5678/api/works")
         const photosGallery = document.querySelector(".photos")
         const photoAdd = document.getElementById("photoAdd")
 
+        console.log(travaux)
 
         function generationPhotos(){
 
@@ -243,9 +244,7 @@ fetch("http://localhost:5678/api/works")
             
             reset()
             generationTravaux(travaux)
-            location.reload()
-            
-            
+            //location.reload()
         })
 
         const clickClose1 = document.getElementById("close1")
