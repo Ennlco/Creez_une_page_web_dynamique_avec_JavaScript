@@ -110,6 +110,9 @@ li img{
 li:hover {
 	color: #B1663C;
 }
+nav a:hover{
+	color: #B1663C;
+}
 #introduction {
 	display: flex;
 	align-items: center;
