@@ -293,7 +293,7 @@ footer nav ul {
 	position: fixed;
 	top: 0;
 	left: 0;
-	transform: translate(80%,25%);
+	transform: translate(80%,20%);
 	display: none;
 	flex-direction: column;
 	background-color: white;
