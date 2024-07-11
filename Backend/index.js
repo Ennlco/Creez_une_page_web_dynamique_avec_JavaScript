@@ -40,6 +40,8 @@ fetchTravaux();
 function generationFiltre(category){
     const divContent = document.querySelector(".contentFiltrers")
     
+    divContent.style.display = "flex"
+    
     const divTous = document.createElement("div")
     divTous.className = "filtres"
     divTous.dataset.categoryId = ""
@@ -67,7 +69,7 @@ function fetchFiltres(){
         .then(response => response.json())
         .then(category => {
             generationFiltre(category);
-            fltTraveaux()
+            fltTraveaux();
         });
 }
 
@@ -77,14 +79,14 @@ function fltTraveaux(){
 
     for(let i = 0; i < fltCategory.length; i++){
         
-        const fltId = fltCategory[i].dataset.categoryId
+        const fltId = fltCategory[i].dataset.categoryId;
         
         fltCategory[i].addEventListener("click", () =>{
 
             if(fltId === ""){
-                fetchTravaux()
+                fetchTravaux();
             } else {
-                filterTravaux(fltId)
+                filterTravaux(fltId);
             }
         })
     }
@@ -96,7 +98,7 @@ function filterTravaux(categoryId){
         .then(response => response.json())
         .then(travaux => {
 
-            const filteredTravaux = travaux.filter(travaux => travaux.categoryId === categoryId);
+            const filteredTravaux = travaux.filter(travaux => travaux.categoryId == categoryId);
             generationTravaux(filteredTravaux);
             
         });
@@ -105,7 +107,7 @@ function filterTravaux(categoryId){
 
 if (token === null) {
     generationLogout();
-    fetchFiltres()
+    fetchFiltres();
 } else {
     generationLogin();
 
@@ -279,6 +281,7 @@ if (token === null) {
         deco.addEventListener("click", () => {
             window.localStorage.removeItem("token");
             generationLogout();
+            fetchFiltres();
         });
     }
 

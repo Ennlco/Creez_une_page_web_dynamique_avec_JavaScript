@@ -33,6 +33,7 @@ function generationLogin(){
     insta.appendChild(image)
 
     divContent.innerHTML = ""
+    divContent.style.display = "none"
 
     const divElement = document.createElement("div")
     divElement.className = "divModif"
