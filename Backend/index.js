@@ -9,7 +9,7 @@ function generationTravaux(travaux) {
     for (let i = 0; i < travaux.length; i++) {
 
         const travauElement = document.createElement("figure");
-
+        travauElement.dataset.categoryId = travaux[i].categoryId
         divGallery.appendChild(travauElement);
 
         
@@ -37,28 +37,75 @@ function fetchTravaux() {
 
 fetchTravaux();
 
-const fltTous = document.getElementById("choixTous");
-const fltObjets = document.getElementById("choixObjets");
-const fltAppart = document.getElementById("choixAppartements");
-const fltHotelRest = document.getElementById("choixHotels_Restaurants");
+function generationFiltre(category){
+    const divContent = document.querySelector(".contentFiltrers")
+    
+    const divTous = document.createElement("div")
+    divTous.className = "filtres"
+    divTous.dataset.categoryId = ""
+    divContent.appendChild(divTous)
 
-fltTous.addEventListener("click", fetchTravaux);
-fltObjets.addEventListener("click", () => filterTravaux(1));
-fltAppart.addEventListener("click", () => filterTravaux(2));
-fltHotelRest.addEventListener("click", () => filterTravaux(3));
+    const textTous = document.createElement("p")
+    textTous.innerText = "Tous"
+    divTous.appendChild(textTous)
 
-function filterTravaux(categoryId) {
+    for(let i = 0; i < category.length; i++){
+
+        const divElement = document.createElement("div")
+        divElement.className = "filtres"
+        divElement.dataset.categoryId = category[i].id
+        divContent.appendChild(divElement)
+
+        const textElement = document.createElement("p")
+        textElement.innerText = category[i].name
+        divElement.appendChild(textElement)
+    }
+}
+
+function fetchFiltres(){
+    fetch("http://localhost:5678/api/categories")
+        .then(response => response.json())
+        .then(category => {
+            generationFiltre(category);
+            fltTraveaux()
+        });
+}
+
+function fltTraveaux(){
+
+    const fltCategory = document.querySelectorAll(".filtres");
+
+    for(let i = 0; i < fltCategory.length; i++){
+        
+        const fltId = fltCategory[i].dataset.categoryId
+        
+        fltCategory[i].addEventListener("click", () =>{
+
+            if(fltId === ""){
+                fetchTravaux()
+            } else {
+                filterTravaux(fltId)
+            }
+        })
+    }
+}
+
+function filterTravaux(categoryId){
+    
     fetch("http://localhost:5678/api/works")
         .then(response => response.json())
         .then(travaux => {
+
             const filteredTravaux = travaux.filter(travaux => travaux.categoryId === categoryId);
             generationTravaux(filteredTravaux);
+            
         });
 }
 
 
 if (token === null) {
     generationLogout();
+    fetchFiltres()
 } else {
     generationLogin();
 

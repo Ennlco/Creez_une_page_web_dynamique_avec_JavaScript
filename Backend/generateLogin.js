@@ -1,8 +1,8 @@
 function generationLogin(){
     const navigation = document.querySelector("nav ul")
     const modif = document.querySelector("section[id=portfolio] h2")
-    const filtres = document.querySelector(".contentFiltrers")
     const divEdition = document.querySelector(".divHeader")
+    const divContent = document.querySelector(".contentFiltrers")
 
     divEdition.style.display = "flex"
 
@@ -32,7 +32,7 @@ function generationLogin(){
     navigation.appendChild(insta)
     insta.appendChild(image)
 
-    filtres.style.display = "none"
+    divContent.innerHTML = ""
 
     const divElement = document.createElement("div")
     divElement.className = "divModif"
